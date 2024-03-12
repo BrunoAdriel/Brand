@@ -1,11 +1,11 @@
 import React from 'react'
 import Wallet from '../Imgs/wallet2.png'
+import { Link } from 'react-router-dom'
 
 function CartWidget() {
 return (
     <div className='nav'>
-        <img src={Wallet} alt='carrito de compras' href="#"/>
-        <p>3</p>
+        <Link  to='/cart'><img src={Wallet} alt='carrito de compras' href="#"/>3 </Link>
     </div>
 )
 }
