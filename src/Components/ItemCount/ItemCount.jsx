@@ -19,11 +19,21 @@ const ItemCount = ({initial=1, stock, onAdd})=>{
     return(
         <article>
             <h4>{count}</h4>
-            <button onClick={decrement}>-</button>
-            <button onClick={() => onAdd(count)}>Agregar  a carrito</button>
-            <button onClick={increment}>+</button>
+            <div className="btn-toolbar mb-3 centerButtonItemCount" role="toolbar" aria-label="Toolbar with button groups">
+                <div className="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" className="btn btn-outline-secondary" onClick={decrement}>-</button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={() => onAdd(count)}>Agregar  a carrito</button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={increment}>+</button>
+                </div>
+            </div>
         </article>
     )
 }
 
 export default ItemCount
+
+
+
+
+
+

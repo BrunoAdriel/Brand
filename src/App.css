@@ -1,3 +1,8 @@
+/* main{
+  padding: 20%;
+  background-color: bisque;
+} */
+
 /* clase navbar */
 
 .sectionNav{
@@ -17,3 +22,43 @@ color: black;
 .SpaceWallet{
   margin-top: 13px;
 }
+
+/* Clase Items */
+
+.imgItem{
+  max-width: 540px;
+}
+
+.card{
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Class ItemDetail */
+
+.imgItemDetail{
+  width: 18rem;
+}
+
+/* Padding de productos */
+
+/* .paddingCard{
+  padding-left: 100px;
+} */
+
+/* Padding Producs Detail */
+
+/* .paddingContainerDetail{
+  padding-left: 20%;
+} */
+
+.paddingItemDetail{
+  text-align: center;
+  display: flex;
+  justify-content: space-around
+}
+
+.centerButtonItemCount{
+  display: flex;
+  justify-content: space-around;
+}
+

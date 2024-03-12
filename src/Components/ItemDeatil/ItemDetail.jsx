@@ -11,14 +11,21 @@ const ItemDetail = ({ name, price, img, description, stock }) => {
     }
     
     return (
-    <article>
-        <img src={img} />
-        <h4>{name}</h4>
-        <a>{description}</a>
-        <a>{price}</a>
-        {quantity === 0 ? <ItemCount stock={stock} onAdd={handleOnAdd}/> : <button>Ver carrito</button>}
+    <article className='paddingItemDetail'>
+        <div className="card imgItemDetail ">
+        <img src={img} className="card-img-top" alt="..."/>
+            <div className="card-body">
+                <h5 className="card-title">{name}</h5>
+                <p className="card-text">{description}</p>
+                <p className="card-text">$ {price}</p>
+                {quantity === 0 ? <ItemCount stock={stock} onAdd={handleOnAdd}/> : <button className="btn btn-success">Ver carrito! 🛒</button>}
+            </div>
+        </div>
     </article>
 )
 }
 
 export default ItemDetail
+
+
+

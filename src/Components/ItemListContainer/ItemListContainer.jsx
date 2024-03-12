@@ -33,7 +33,7 @@ function ItemListContainer() {
 
     return (
     <>
-        <div className='container'>
+        <div className='container paddingCard'>
             <h1>Nuestros Productos</h1>
             <ItemList products={products}/>
         </div>
