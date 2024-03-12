@@ -3,6 +3,27 @@
   background-color: bisque;
 } */
 
+
+body {
+  margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
+  background-color: #fff; /* Color de fondo blanco para los lados */
+}
+
+/* Crear franjas blancas a los lados de la página */
+#container {
+  display: flex; /* Utilizar flexbox para organizar los elementos */
+  justify-content: space-between; /* Espacio entre los elementos, empujando los laterales a los extremos */
+  flex-direction: column;
+  background-color: bisque; /* Color de fondo del contenido */
+  padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Estilo para el contenido principal */
+main {
+  flex-grow: 1; /* Hace que el contenido principal ocupe todo el espacio disponible */
+  padding: 25px; /* Ajusta el relleno del contenido principal según sea necesario */
+}
+
 /* clase navbar */
 
 .sectionNav{
@@ -41,15 +62,15 @@ color: black;
 
 /* Padding de productos */
 
-/* .paddingCard{
-  padding-left: 100px;
-} */
+.paddingTitles{
+  padding-left: 6%;
+}
+
+.paddingCard{
+  padding-left: 15%;
+}
 
 /* Padding Producs Detail */
-
-/* .paddingContainerDetail{
-  padding-left: 20%;
-} */
 
 .paddingItemDetail{
   text-align: center;

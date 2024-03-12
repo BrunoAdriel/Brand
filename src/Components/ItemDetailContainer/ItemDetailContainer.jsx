@@ -20,8 +20,11 @@ const ItemDetailContainer = () => {
 
     return (
     <>
-    <h1 className='paddingContainerDetail'>Detalles del producto</h1>
-    <ItemDetail {...product}/>
+    <div className='container' id='container'>
+        <h1 className='paddingTitles'>Detalles del producto</h1>
+        <ItemDetail {...product}/>
+    </div>
+    
     </>
 )
 }
