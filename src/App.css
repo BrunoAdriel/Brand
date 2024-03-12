@@ -1,21 +1,16 @@
-/* main{
-  padding: 20%;
-  background-color: bisque;
-} */
-
 
 body {
-  margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
-  background-color: #fff; /* Color de fondo blanco para los lados */
+  margin: 0; 
+  background-color: rgba(179, 179, 179, 0.65);
 }
 
 /* Crear franjas blancas a los lados de la página */
 #container {
-  display: flex; /* Utilizar flexbox para organizar los elementos */
-  justify-content: space-between; /* Espacio entre los elementos, empujando los laterales a los extremos */
+  display: flex; 
+  justify-content: space-between; 
   flex-direction: column;
-  background-color: bisque; /* Color de fondo del contenido */
-  padding: 20px; /* Espaciado alrededor del contenido */
+  background-color: bisque; 
+  padding: 20px; 
 }
 
 /* Estilo para el contenido principal */
@@ -58,6 +53,15 @@ color: black;
 
 .imgItemDetail{
   width: 18rem;
+}
+
+/* Clase Link */
+
+.linkClass{
+  color:black;
+  text-decoration:underline;
+  display: flex;
+  justify-content: center;
 }
 
 /* Padding de productos */
