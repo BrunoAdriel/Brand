@@ -27,8 +27,14 @@ function ItemListContainer() {
     },[categoryId])
 
     if(loading){
-        return <h1>Cargando listado de productos ...</h1>
-    }
+        return( <section className='paddingCard'>
+                    <h1>Cargando Productos...</h1>
+                    <div class="spinner-border text-secondary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div>
+                </section>
+    )
+}
 
 
     return (
