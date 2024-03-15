@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemCount from '../ItemCount/ItemCount'
 import { useState, useContext } from 'react'
-import { CartContext } from '../../App'
+import { CartContext } from '../Context/CartContext'
 
 const ItemDetail = ({ name, price, img, description, stock, id }) => {
     const [quantity, setquantity] = useState(0)

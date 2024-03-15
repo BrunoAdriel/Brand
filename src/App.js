@@ -3,33 +3,16 @@ import Navbar from './Components/Navbar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createContext, useState } from 'react';
+import CartProvider from './Components/Context/CartContext';
 
-export const CartContext = createContext()
+
+
 
 function App() {
 
-  const [cart, setCart] = useState([])
-  console.log(cart)
-  
-  const addItem = (prodToAdd) => {
-    if (!isInCart(prodToAdd.id)) {
-      setCart(prev => [...prev, prodToAdd]);
-    } else {
-      setCart(prev =>prev.map(item =>item.id === prodToAdd.id ? 
-              { ...item, quantity: item.quantity + prodToAdd.quantity } : item
-        ));
-    }
-  };
-
-  const isInCart = (id) =>{
-    return cart.some(prod => prod.id === id)
-  }
-
-
 return (
     <>
-    <CartContext.Provider value={{cart, addItem}}>
+    <CartProvider>
       <BrowserRouter>
       <Navbar/>
         <Routes>
@@ -38,7 +21,7 @@ return (
           <Route path='/item/:itemId' element={<ItemDetailContainer/>} />
         </Routes>
       </BrowserRouter>
-    </CartContext.Provider>
+    </CartProvider>
     </>
 );
 }
