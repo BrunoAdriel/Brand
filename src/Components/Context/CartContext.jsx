@@ -1,11 +1,15 @@
 import React from 'react'
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const CartContext = createContext()
 
 const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        localStorage.setItem("cartProducts", JSON.stringify(cart));
+    }, [cart])
 
     const addItem = (prodToAdd) => {
     if (!isInCart(prodToAdd.id)) {
