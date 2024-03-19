@@ -55,6 +55,10 @@ color: black;
   width: 18rem;
 }
 
+.buttonSpace{
+  margin-top: 5px;
+}
+
 /* Clase Link */
 
 .linkClass{
@@ -87,3 +91,38 @@ color: black;
   justify-content: space-around;
 }
 
+/* Clases Cart */
+
+.alaingCart{
+  color:black;
+  text-decoration:underline;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15%;
+}
+
+.imgCart{
+  width:70px;
+  height:70px;
+}
+
+.centerTable{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.cartLeft{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cartLeft button{
+  margin-right: 30px;
+}
+
+.table-border{
+  border-bottom: 1px solid #000;
+}
