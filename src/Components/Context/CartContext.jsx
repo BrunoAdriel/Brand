@@ -5,11 +5,23 @@ export const CartContext = createContext()
 
 const CartProvider = ({ children }) => {
 
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(() => {
+        try {
+            const localCart = localStorage.getItem("cartProducts");
+            return localCart ? JSON.parse(localCart) : [];
+        } catch (error) {
+            console.error("Error reading LocalStorage", error);
+            return [];
+        }
+    });
 
     useEffect(() => {
-        localStorage.setItem("cartProducts", JSON.stringify(cart));
-    }, [cart])
+        try {
+            localStorage.setItem("cartProducts", JSON.stringify(cart));
+        } catch (error) {
+            console.error("Error al guardar productos del carrito en el almacenamiento local:", error);
+        }
+    }, [cart]);
 
     const addItem = (prodToAdd) => {
     if (!isInCart(prodToAdd.id)) {

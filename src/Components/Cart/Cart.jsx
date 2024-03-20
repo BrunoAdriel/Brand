@@ -5,13 +5,13 @@ import ItemCart from './ItemCart';
 
 const Cart = () => {
     const { cart, clear, totalPrice } = useContext(CartContext);
-
-    const prodSave = JSON.parse(localStorage.getItem("cartProducts"));
-    const hasProducts = cart.length > 0 ||  prodSave.length > 0;
-
+    
+    const localCart = JSON.parse(localStorage.getItem("cartProducts"));
+    const hasProducts = cart.length > 0 || (localCart && localCart.length > 0);
+    
     if (!hasProducts) {
         return (
-            <div className="alaingCart"> 
+            <div className="alaingCart">
                 <p className='fw-bolder'>No hay productos cargados en el carrito.</p>
                 <Link to="/">
                     <button className="btn btn-dark">Volver al Inicio</button>
@@ -19,6 +19,7 @@ const Cart = () => {
             </div>
         );
     }
+    
 
     return (
         <>
