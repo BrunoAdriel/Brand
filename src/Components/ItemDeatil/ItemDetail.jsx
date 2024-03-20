@@ -3,11 +3,15 @@ import ItemCount from '../ItemCount/ItemCount'
 import { useState, useContext } from 'react'
 import { CartContext } from '../Context/CartContext'
 import { Link } from 'react-router-dom'
+import { useNotification } from '../Notificaciones/NotificacionService'
+
 
 const ItemDetail = ({ name, price, img, description, stock, id }) => {
     const [quantity, setquantity] = useState(0)
 
     const { addItem } = useContext(CartContext)
+
+    const {showNotification} = useNotification()
 
     const handleOnAdd = (quantity) => {
         setquantity(quantity)
@@ -15,6 +19,8 @@ const ItemDetail = ({ name, price, img, description, stock, id }) => {
         const objtToCart ={
             id, name, price, quantity, img
         }
+
+        showNotification('success', `se agrego correctamente ${quantity}, ${name} `)
 
         addItem(objtToCart)
     

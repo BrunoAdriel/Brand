@@ -14,7 +14,7 @@ function Navbar() {
             </section>
             <ul className="nav nav-underline justify-content-center">
                 <li className="nav-item">
-                    <Link to='/'><a className="nav-link active" aria-current="page" href="# ">Brand</a></Link>
+                    <Link to='/'><a className="nav-link active" aria-current="page" href="#">Brand</a></Link>
                 </li>
                 <li className="nav-item">
                     <Link to='/category/Celulares'><a className="nav-link" href="#" >Celulares</a></Link>

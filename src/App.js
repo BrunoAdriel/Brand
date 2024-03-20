@@ -5,6 +5,8 @@ import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailCont
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CartProvider from './Components/Context/CartContext';
 import Cart from './Components/Cart/Cart';
+import { NotificationProvider} from './Components/Notificaciones/NotificacionService.jsx'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -12,8 +14,9 @@ function App() {
 
 return (
     <>
-    <CartProvider>
+      <NotificationProvider>
       <BrowserRouter>
+        <CartProvider>
       <Navbar/>
         <Routes>
           <Route path='/' element={<ItemListContainer greeting={'Bienvenidos'} />} />
@@ -21,8 +24,9 @@ return (
           <Route path='/item/:itemId' element={<ItemDetailContainer/>} />
           <Route path='/cart' element={<Cart/>} />
         </Routes>
+        </CartProvider>
       </BrowserRouter>
-    </CartProvider>
+        </NotificationProvider>
     </>
 );
 }
