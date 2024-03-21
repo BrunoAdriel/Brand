@@ -1,5 +1,6 @@
 import React from 'react'
 import { createContext, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext()
 
@@ -58,6 +59,7 @@ const CartProvider = ({ children }) => {
 
     const clear = () => {
         setCart([])
+        toast.error(`Se eliminaron todos los productos del carrito`)
     }
 
     const totalPrice = () =>{
