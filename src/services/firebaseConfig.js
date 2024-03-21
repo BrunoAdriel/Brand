@@ -94,3 +94,18 @@ const products = [{
 }
 ];
 
+// // Función para añadir productos a Firestore
+// async function addProductsToFirestore(products) {
+//     const productsCol = collection(db, "products");
+//     for (const product of products) {
+//         try {
+//             const docRef = await addDoc(productsCol, product);
+//             console.log("Documento escrito con ID: ", docRef.id);
+//         } catch (e) {
+//             console.error("Error añadiendo documento: ", e);
+//         }
+//     }
+// }
+
+// // Llama a la función para añadir los productos
+// addProductsToFirestore(products);

@@ -24,7 +24,6 @@ function ItemListContainer() {
                     const data = doc.data()
                     return{ id: doc.id, ...data}
                 })
-                console.log(productAdapted)
                 setProducts(productAdapted)
             })
             .catch(error=>{
