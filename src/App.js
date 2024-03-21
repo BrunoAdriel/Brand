@@ -5,8 +5,8 @@ import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailCont
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CartProvider from './Components/Context/CartContext';
 import Cart from './Components/Cart/Cart';
-import { NotificationProvider} from './Components/Notificaciones/NotificacionService.jsx'
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -14,7 +14,7 @@ function App() {
 
 return (
     <>
-      <NotificationProvider>
+
       <BrowserRouter>
         <CartProvider>
       <Navbar/>
@@ -26,7 +26,18 @@ return (
         </Routes>
         </CartProvider>
       </BrowserRouter>
-        </NotificationProvider>
+      <ToastContainer 
+                  position= "top-right"
+                  autoClose= {5000}
+                  hideProgressBar= {false}
+                  closeOnClick= {true}
+                  pauseOnHover= {true}
+                  draggable= {true}
+                  progress= {undefined}
+                  theme= "light"
+                  transition= {'bounce'}
+                  />
+
     </>
 );
 }
