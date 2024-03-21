@@ -8,9 +8,9 @@ import { toast } from 'react-toastify';
 
 
 
+
 const ItemDetail = ({ name, price, img, description, stock, id }) => {
     const [quantity, setquantity] = useState(0)
-
     const { addItem } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {

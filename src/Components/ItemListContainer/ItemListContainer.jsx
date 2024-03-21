@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { getProducts,  getProductsByCategory } from '../../Mocks/AsynckMocks'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router'
+import { toast } from 'react-toastify';
+
 
 function ItemListContainer() {
     const [products,  setProducts] = useState([])
@@ -19,7 +21,7 @@ function ItemListContainer() {
                 setProducts(result)
             })
             .catch(error=>{
-                console.log(error)
+                toast.error(`Error al cargar los productos`,error)
             })
             .finally(()=>{
                 setLoadin(false)

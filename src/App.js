@@ -17,27 +17,27 @@ return (
 
       <BrowserRouter>
         <CartProvider>
-      <Navbar/>
-        <Routes>
-          <Route path='/' element={<ItemListContainer greeting={'Bienvenidos'} />} />
-          <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos de  la categoria: '} />} />
-          <Route path='/item/:itemId' element={<ItemDetailContainer/>} />
-          <Route path='/cart' element={<Cart/>} />
-        </Routes>
-        </CartProvider>
-      </BrowserRouter>
-      <ToastContainer 
-                  position= "top-right"
-                  autoClose= {5000}
-                  hideProgressBar= {false}
-                  closeOnClick= {true}
-                  pauseOnHover= {true}
-                  draggable= {true}
-                  progress= {undefined}
-                  theme= "light"
-                  transition= {'bounce'}
-                  />
-
+        <Navbar/>
+          <Routes>
+            <Route path='/' element={<ItemListContainer greeting={'Bienvenidos'} />} />
+            <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos de  la categoria: '} />} />
+            <Route path='/item/:itemId' element={<ItemDetailContainer/>} />
+            <Route path='/cart' element={<Cart/>} />
+          </Routes>
+          </CartProvider>
+        </BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </>
 );
 }
