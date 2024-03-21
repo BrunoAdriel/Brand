@@ -1,10 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { getProducts,  getProductsByCategory } from '../../Mocks/AsynckMocks'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify';
-
+import {getDocs, collection, query, where} from 'firebase/firestore'
+import { db } from '../../services/firebaseConfig';
 
 function ItemListContainer() {
     const [products,  setProducts] = useState([])
@@ -13,12 +13,18 @@ function ItemListContainer() {
     const { categoryId } = useParams()
 
     useEffect(()=>{
-        setLoadin(true)
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
-        
-        asyncFunction(categoryId)
-            .then(result => {
-                setProducts(result)
+    
+        const prodsCollection = categoryId
+        ? query(collection(db, 'products'), where ('category', '==', categoryId))
+        : collection(db, 'products')
+
+        getDocs(prodsCollection)
+            .then(querySnapshot =>{
+                const productAdapted = querySnapshot.docs.map( doc =>{
+                    const data = doc.data()
+                    return{ id: doc.id, ...data}
+                })
+                setProducts(productAdapted)
             })
             .catch(error=>{
                 toast.error(`Error al cargar los productos`,error)
