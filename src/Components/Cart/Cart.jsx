@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../Context/CartContext';
 import ItemCart from './ItemCart';
+import BackButton from '../BackButton/BackButton';
 
 
 const Cart = () => {
@@ -22,8 +23,10 @@ const Cart = () => {
     }
     
 
-    return (
-        <>
+    return (<>
+        <section className='paddingCard'>
+            <BackButton/>
+        </section>
             <div className='container centerTable'> 
                 <table className="table-light table-border">
                     <thead>

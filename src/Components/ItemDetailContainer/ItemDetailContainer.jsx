@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-// import  { getProductsById } from "../../Mocks/AsynckMocks"
 import ItemDetail from '../ItemDeatil/ItemDetail'
 import { useParams } from 'react-router'
 import { getDoc, doc, QueryDocumentSnapshot } from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig'
 import { toast } from 'react-toastify';
+import BackButton from '../BackButton/BackButton';
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null)
@@ -25,7 +25,6 @@ const ItemDetailContainer = () => {
             .catch(error=>{
                 toast.error(`Error al cargar los datos del productos`,error)
             })
-            
     },[itemId])
 
 
@@ -33,6 +32,7 @@ const ItemDetailContainer = () => {
     return (
     <>
     <div className='container' id='container'>
+        <BackButton/>
         <h1 className='paddingTitles'>Detalles del producto</h1>
         <ItemDetail {...product}/>
     </div>

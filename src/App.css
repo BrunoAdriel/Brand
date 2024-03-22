@@ -126,3 +126,9 @@ color: black;
 .table-border{
   border-bottom: 1px solid #000;
 }
+
+/* Clase de ButtonBack */
+
+.BackClass{
+  color: #000;
+}
