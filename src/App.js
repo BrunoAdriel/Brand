@@ -7,6 +7,7 @@ import CartProvider from './Components/Context/CartContext';
 import Cart from './Components/Cart/Cart';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Checkout from './Components/Checkout/Checkout';
 // import { collection, addDoc } from 'firebase/firestore'
 // import { db } from './services/firebaseConfig'; 
 // import { useEffect } from 'react';
@@ -100,6 +101,7 @@ return (
             <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos de  la categoria: '} />} />
             <Route path='/item/:itemId' element={<ItemDetailContainer/>} />
             <Route path='/cart' element={<Cart/>} />
+            <Route path='/Checkout' element={<Checkout/>} />
           </Routes>
           </CartProvider>
         </BrowserRouter>

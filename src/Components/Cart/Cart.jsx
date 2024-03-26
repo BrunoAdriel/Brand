@@ -50,7 +50,7 @@ const Cart = () => {
                 </section>
                 <section>
                     <button className='btn btn-outline-danger' onClick={clear}>Vaciar Carrito</button>
-                    <button className='btn btn-outline-success'>Finalizar Compra</button>
+                    <Link to="/Checkout"><button className='btn btn-outline-success'>Finalizar Compra</button></Link>
                 </section>
             </div>
         </>
