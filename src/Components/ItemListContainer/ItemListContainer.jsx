@@ -5,7 +5,6 @@ import { useParams } from 'react-router'
 import { toast } from 'react-toastify';
 import {getDocs, collection, query, where} from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig';
-import { sendProducts } from '../../services/firebaseConfig';
 
 
 function ItemListContainer() {
