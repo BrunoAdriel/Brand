@@ -1,8 +1,9 @@
 import React from 'react'
 import { CartContext } from '../Context/CartContext'
 import { useContext, useState } from 'react'
-import { collection, query, where, documentId, getDocs, querySnapshot, addDoc, writeBatch } from 'firebase/firestore'
+import { collection, query, where, documentId, querySnapshot, getDocs, addDoc, writeBatch } from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig'
+import { toast } from 'react-toastify';
 
 const Checkout = () => {
     const [name, setName] = useState('');
@@ -12,17 +13,22 @@ const Checkout = () => {
     const [number, setNumber] = useState('');
     const [zip, setZip] = useState('');
     const { cart, totalPrice} = useContext(CartContext)
+    // const [loading, setLoading] = useContext(CartContext)
     
     const createOrder = async () =>{
-    try{
+        try{
+
             const objOrder = {
                 buyer: {
-                    nombre: name,
-                    apellido: surname,
-                    email: email,
-                    direccion: address,
-                    telefono: number,
-                    zip: zip 
+                    nombre:'ads',
+                    email:'ads@',
+                    telefono: '222'
+                    // nombre: name,
+                    // apellido: surname,
+                    // email: email,
+                    // direccion: address,
+                    // telefono: number,
+                    // zip: zip 
                 },
                 items: cart,
                 total: totalPrice
@@ -33,10 +39,10 @@ const Checkout = () => {
             const ids = cart.map(prod => prod.id)
     
             const prodCollection = query(collection(db, 'products'),where(documentId(), 'in', ids))
-    
+
             const querySnapshot = await getDocs(prodCollection)
             const { docs } = querySnapshot
-    
+            
             docs.forEach(doc =>{
                 const data = doc.data()
                 const stockDb = data.stock
@@ -45,7 +51,7 @@ const Checkout = () => {
                 const prodQuantity = prodAddedToCart.quantity
     
                 if(stockDb >= prodQuantity){
-                    batch.update(doc.ref, {sotck: stockDb - prodQuantity} )
+                    batch.update(doc.ref, {stock: stockDb - prodQuantity} )
                 }else {
                     outOfStock.push({id: doc.id, ...data})
                 }
@@ -54,16 +60,22 @@ const Checkout = () => {
             if(outOfStock.length === 0){
                 batch.commit()
                 const orderCollection = collection(db,'orders')
-                const { id } = addDoc(orderCollection, objOrder)
+                const { id } = await addDoc(orderCollection, objOrder)
+                console.log(id)
             }else{
-                console.log("hay un producto fuera de Stock")
+                toast.error("hay un producto fuera de Stock")
             }
+        }catch(error){
+            toast.error('hubo un error en la generacion de la orden', error)
+        }finally{
+            // setLoading(false)
         }
-    
-    }catch (error) {
-        console.log("Error", error);
-    }
 
+        // if(loading){
+        //     return <h1 className='linkClass'>Generando orden de compra</h1>
+        // }
+}
+    
     return (
 
 <div className='containerCheckout'>
@@ -78,27 +90,26 @@ const Checkout = () => {
                 <input type="text" id="imputSurname" className="form-control" placeholder="Apellido" aria-label="Last name" value={surname} onChange={(e) => setSurname(e.target.value)}/>
             </div>
         </div>
-        <div class="col-md-8">
-            <label for="inputNumber" class="form-label"/>
-            <input type="text" class="form-control" id="inputNumber" placeholder="Numero de Telefono" value={number} onChange={(e) => setNumber(e.target.value)}/>
+        <div className="col-md-8">
+            <label for="inputNumber" className="form-label"/>
+            <input type="text" className="form-control" id="inputNumber" placeholder="Numero de Telefono" value={number} onChange={(e) => setNumber(e.target.value)}/>
         </div>
-
-        <div class="mb-3">
+        <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label"></label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Direccion Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label"></label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Direccion Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
         <section className='row'>
-        <div class="col-md-6">
-            <label for="inputAddress" class="form-label"/>
-            <input type="text" class="form-control" id="inputAddress" placeholder="Direccion de entrega" value={address} onChange={(e) => setAddress(e.target.value)}/>
+        <div className="col-md-6">
+            <label for="inputAddress" className="form-label"/>
+            <input type="text" className="form-control" id="inputAddress" placeholder="Direccion de entrega" value={address} onChange={(e) => setAddress(e.target.value)}/>
         </div>
-        <div class="col-md-2">
-            <label for="inputZip" class="form-label"/>
-            <input type="text" class="form-control" id="inputZip" placeholder='Zip' value={zip} onChange={(e) => setZip(e.target.value)}/>
+        <div className="col-md-2">
+            <label for="inputZip" className="form-label"/>
+            <input type="text" className="form-control" id="inputZip" placeholder='Zip' value={zip} onChange={(e) => setZip(e.target.value)}/>
         </div>
         </section>
         <button onClick={createOrder}>Finalizar Compra!</button>
