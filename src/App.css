@@ -132,3 +132,16 @@ color: black;
 .BackClass{
   color: #000;
 }
+
+/* Clases Checkout */
+
+.containerCheckout{
+  padding: 10px;
+  width: 700px;
+  height: 450px;
+  border-radius: 3%;
+  background-color: #b9b9b9;
+  position: absolute;
+  bottom: 25%;
+  left: 60%;  
+}
