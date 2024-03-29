@@ -1,9 +1,10 @@
 import React from 'react'
 import { CartContext } from '../Context/CartContext'
 import { useContext, useState } from 'react'
-import { collection, query, where, documentId, querySnapshot, getDocs, addDoc, writeBatch } from 'firebase/firestore'
+import { collection, query, where, documentId, getDocs, addDoc, writeBatch } from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig'
 import { toast } from 'react-toastify';
+import BackButton from '../BackButton/BackButton'
 
 const Checkout = () => {
     const [name, setName] = useState('');
@@ -22,15 +23,15 @@ const Checkout = () => {
             setLoading(true)
             const objOrder = {
                 buyer: {
-                    nombre:'ads',
-                    email:'ads@',
-                    telefono: '222'
-                    // nombre: name,
-                    // apellido: surname,
-                    // email: email,
-                    // direccion: address,
-                    // telefono: number,
-                    // zip: zip 
+                    // nombre:'ads',
+                    // email:'ads@',
+                    // telefono: '222'
+                    nombre: name,
+                    apellido: surname,
+                    email: email,
+                    direccion: address,
+                    telefono: number,
+                    zip: zip 
                 },
                 items: cart,
                 total: totalPrice()
@@ -88,19 +89,20 @@ const Checkout = () => {
         )}
     
 
-        // checkear que no te devuelva las anteriores ordenes y ponerle estilos
-        // if(orderId){
-        //     return <h3>Su numero de order es: {orderId} </h3>
-        // }
+        if(orderId){
+            return <h3 className='linkClass SpaceWallet'>Gracias por su compra su numero de orden es: {orderId}</h3>
+        }
 
 
-return (
-
+return (<>
+<section className='paddingCard'>
+    <BackButton/>
+</section>
 <div className='containerCheckout'>
     <form id="registerForm" onSubmit={(e) => { e.preventDefault(); createOrder(); }}>
         <div className="row">
             <div className="col">
-            <label for="imputName"/>
+            <label for="imputName" />
                 <input type="text" id="imputName" className="form-control" placeholder="Nobre" aria-label="First name" value={name} onChange={(e) => setName(e.target.value)}/>
             </div>
             <div className="col">
@@ -130,11 +132,10 @@ return (
             <input type="text" className="form-control" id="inputZip" placeholder='Zip' value={zip} onChange={(e) => setZip(e.target.value)}/>
         </div>
         </section>
-        <button onClick={createOrder}>Finalizar Compra!</button>
+        <button className='btn btn-success buttonSpace' onClick={createOrder}>Finalizar Compra!</button>
     </form>
-    {/* {loading && <h1 className='linkClass'>Generando orden de compra...</h1>}     */}
 </div>
-)
+</>)
 }
 
 export default Checkout
