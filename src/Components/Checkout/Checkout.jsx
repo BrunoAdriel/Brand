@@ -12,10 +12,14 @@ const Checkout = () => {
     const [address, setAddress] = useState('');
     const [number, setNumber] = useState('');
     const [zip, setZip] = useState('');
-    const { cart, totalPrice, loading, setLoading} = useContext(CartContext)
+    const { cart, totalPrice, clear} = useContext(CartContext)
+    const [loading, setLoading] = useState(false)
+    const [orderId, setOrderId] = useState(null)
+
     
     const createOrder = async () =>{
         try{
+            setLoading(true)
             const objOrder = {
                 buyer: {
                     nombre:'ads',
@@ -54,22 +58,41 @@ const Checkout = () => {
                 }
             })
             
-            setLoading(true); 
+
 
             if(outOfStock.length === 0){
                 batch.commit()
                 const orderCollection = collection(db, 'orders')
                 const { id } = await addDoc(orderCollection, objOrder)
-
+                clear()
+                setOrderId(id)
             }else{
                 toast.error("hay un producto fuera de Stock")
             }
-            setLoading(false);
+
         }catch(error){
             console.error(error);
             toast.error('hubo un error en la generacion de la orden', error);
+        }finally{
+            setLoading(false)
         }
+    
     }
+    if(loading){
+        return (<section className='linkClass'>
+                    <h1>Tu orden esta siendo generada...</h1>
+                    <div className="spinner-border text-secondary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </section>
+        )}
+    
+
+        // checkear que no te devuelva las anteriores ordenes y ponerle estilos
+        // if(orderId){
+        //     return <h3>Su numero de order es: {orderId} </h3>
+        // }
+
 
 return (
 
@@ -109,7 +132,7 @@ return (
         </section>
         <button onClick={createOrder}>Finalizar Compra!</button>
     </form>
-    {loading && <h1 className='linkClass'>Generando orden de compra...</h1>}
+    {/* {loading && <h1 className='linkClass'>Generando orden de compra...</h1>}     */}
 </div>
 )
 }
