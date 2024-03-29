@@ -17,7 +17,6 @@ const Checkout = () => {
     
     const createOrder = async () =>{
         try{
-
             const objOrder = {
                 buyer: {
                     nombre:'ads',
@@ -31,7 +30,7 @@ const Checkout = () => {
                     // zip: zip 
                 },
                 items: cart,
-                total: totalPrice
+                total: totalPrice()
             }
     
             const batch = writeBatch(db)
@@ -39,7 +38,6 @@ const Checkout = () => {
             const ids = cart.map(prod => prod.id)
     
             const prodCollection = query(collection(db, 'products'),where(documentId(), 'in', ids))
-
             const querySnapshot = await getDocs(prodCollection)
             const { docs } = querySnapshot
             
@@ -59,14 +57,15 @@ const Checkout = () => {
     
             if(outOfStock.length === 0){
                 batch.commit()
-                const orderCollection = collection(db,'orders')
+                const orderCollection = collection(db, 'orders')
                 const { id } = await addDoc(orderCollection, objOrder)
-                console.log(id)
+
             }else{
                 toast.error("hay un producto fuera de Stock")
             }
         }catch(error){
-            toast.error('hubo un error en la generacion de la orden', error)
+            console.error(error);
+            toast.error('hubo un error en la generacion de la orden', error);
         }finally{
             // setLoading(false)
         }
@@ -74,12 +73,13 @@ const Checkout = () => {
         // if(loading){
         //     return <h1 className='linkClass'>Generando orden de compra</h1>
         // }
-}
-    
-    return (
+
+    }
+
+return (
 
 <div className='containerCheckout'>
-    <form id="registerForm" >
+    <form id="registerForm" onSubmit={(e) => { e.preventDefault(); createOrder(); }}>
         <div className="row">
             <div className="col">
             <label for="imputName"/>

@@ -81,12 +81,12 @@ function App() {
 //     description: 'Memoria: 512 GB, Grosor: 1.55 cm, Ancho: 31.26 cm, Profundidad: 22.12 cm, Peso: 1.55 kg, Chip M3 , GPU de 18 núcleos'
 // }];
     
-    // const productsCollection = collection(db, 'products')
-    // products.forEach(async prod => {
-    // console.log('addDoc')
-    // await addDoc(productsCollection, prod)
-    // })
-    // }, [])
+//     const productsCollection = collection(db, 'products')
+//     products.forEach(async prod => {
+//     console.log('addDoc')
+//     await addDoc(productsCollection, prod)
+//     })
+//     }, [])
     
 
 
