@@ -12,8 +12,7 @@ const Checkout = () => {
     const [address, setAddress] = useState('');
     const [number, setNumber] = useState('');
     const [zip, setZip] = useState('');
-    const { cart, totalPrice} = useContext(CartContext)
-    // const [loading, setLoading] = useContext(CartContext)
+    const { cart, totalPrice, loading, setLoading} = useContext(CartContext)
     
     const createOrder = async () =>{
         try{
@@ -54,7 +53,9 @@ const Checkout = () => {
                     outOfStock.push({id: doc.id, ...data})
                 }
             })
-    
+            
+            setLoading(true); 
+
             if(outOfStock.length === 0){
                 batch.commit()
                 const orderCollection = collection(db, 'orders')
@@ -63,17 +64,11 @@ const Checkout = () => {
             }else{
                 toast.error("hay un producto fuera de Stock")
             }
+            setLoading(false);
         }catch(error){
             console.error(error);
             toast.error('hubo un error en la generacion de la orden', error);
-        }finally{
-            // setLoading(false)
         }
-
-        // if(loading){
-        //     return <h1 className='linkClass'>Generando orden de compra</h1>
-        // }
-
     }
 
 return (
@@ -114,6 +109,7 @@ return (
         </section>
         <button onClick={createOrder}>Finalizar Compra!</button>
     </form>
+    {loading && <h1 className='linkClass'>Generando orden de compra...</h1>}
 </div>
 )
 }

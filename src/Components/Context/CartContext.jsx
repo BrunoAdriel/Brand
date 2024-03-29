@@ -66,8 +66,23 @@ const CartProvider = ({ children }) => {
         return cart.reduce((prev, act) => prev + act.quantity * act.price, 0);
     };
 
+    const useLoading = () => {
+        const [loading, setLoading] = useState(false);
+    
+        const startLoading = () => {
+            setLoading(true);
+        };
+    
+        const stopLoading = () => {
+            setLoading(false);
+        };
+    
+        return { loading, startLoading, stopLoading };
+    }
+
+
 return (
-    <CartContext.Provider value={{cart, addItem, totalQuantity, removeItem, clear, totalPrice}}>
+    <CartContext.Provider value={{cart, addItem, totalQuantity, removeItem, clear, totalPrice, useLoading}}>
         {children}
     </CartContext.Provider>
 )
