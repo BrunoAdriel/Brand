@@ -1,7 +1,7 @@
 import React from 'react'
 import { CartContext } from '../Context/CartContext'
 import { useContext, useState } from 'react'
-import { collection, query, where, documentId, getDocs, addDoc, writeBatch } from 'firebase/firestore'
+import { collection, query, where, documentId, getDocs, addDoc, writeBatch, Timestamp } from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig'
 import { toast } from 'react-toastify';
 import BackButton from '../BackButton/BackButton'
@@ -34,7 +34,8 @@ const Checkout = () => {
                     zip: zip 
                 },
                 items: cart,
-                total: totalPrice()
+                total: totalPrice(),
+                date: Timestamp.fromDate(new Date())
             }
     
             const batch = writeBatch(db)
