@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../Imgs/brilliance.png'
 import CartWidget from './CartWidget'
 import { Link } from 'react-router-dom'
-import {  collection, getDocs, orderBy } from 'firebase/firestore'
+import {  collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { db } from '../services/firebaseConfig'
 import { toast } from 'react-toastify';
 
@@ -13,8 +13,10 @@ function Navbar() {
     const [category, setCategory] = useState([])
 
     useEffect(()=>{
-        const categoriesCollection = collection( db, 'category', orderBy('order', 'asc'))
-        getDocs(categoriesCollection)
+        const categoriesCollection = collection( db, 'category')
+        const orderedCategories = query(categoriesCollection, orderBy('order', 'asc'));
+        
+        getDocs(orderedCategories)
             .then(querySnapshot => {
                 const categoryAdapted = querySnapshot.docs.map( doc =>{
                     const data = doc.data()

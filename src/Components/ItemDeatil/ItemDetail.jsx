@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemCount from '../ItemCount/ItemCount'
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../Context/CartContext'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -10,12 +10,9 @@ import { toast } from 'react-toastify';
 
 
 const ItemDetail = ({ name, price, img, description, stock, id }) => {
-    const [quantity, setquantity] = useState(0)
-    const { addItem } = useContext(CartContext)
+    const { addItem, isInCart } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
-        setquantity(quantity)
-
         const objtToCart ={
             id, name, price, quantity, img
         }
@@ -23,7 +20,6 @@ const ItemDetail = ({ name, price, img, description, stock, id }) => {
         toast.success(`se agrego ${quantity}, ${name}`)
 
         addItem(objtToCart)
-    
     }
     
     return (
@@ -34,7 +30,7 @@ const ItemDetail = ({ name, price, img, description, stock, id }) => {
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{description}</p>
                 <p className="card-text">$ {price}</p>
-                {quantity === 0 ?( <ItemCount stock={stock} onAdd={handleOnAdd}/> ):<>
+                {!isInCart(id)?( <ItemCount stock={stock} onAdd={handleOnAdd}/> ):<>
                 <Link to='/cart'><button className="btn btn-success">Ver carrito! 🛒</button></Link> <Link to='/'><button className="btn btn-secondary buttonSpace">Continuar comprando</button></Link>
                 </>} 
             </div>

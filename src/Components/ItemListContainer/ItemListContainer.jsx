@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify';
-import {getDocs, collection, query, where} from 'firebase/firestore'
+import {getDocs, collection, query, where, orderBy} from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig';
 
 
@@ -17,7 +17,7 @@ function ItemListContainer() {
     
         const prodsCollection = categoryId
         ? query(collection(db, 'products'), where ('category', '==', categoryId))
-        : collection(db, 'products')
+        : query(collection(db, 'products'), orderBy('category'))
 
         getDocs(prodsCollection)
             .then(querySnapshot =>{
