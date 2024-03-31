@@ -13,7 +13,7 @@ const Checkout = () => {
     const [address, setAddress] = useState('');
     const [number, setNumber] = useState('');
     const [zip, setZip] = useState('');
-    const { cart, totalPrice, clear} = useContext(CartContext)
+    const { cart, totalPrice, clear, removeItem} = useContext(CartContext)
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState(null)
 
@@ -23,9 +23,6 @@ const Checkout = () => {
             setLoading(true)
             const objOrder = {
                 buyer: {
-                    // nombre:'ads',
-                    // email:'ads@',
-                    // telefono: '222'
                     nombre: name,
                     apellido: surname,
                     email: email,
@@ -57,6 +54,7 @@ const Checkout = () => {
                     batch.update(doc.ref, {stock: stockDb - prodQuantity} )
                 }else {
                     outOfStock.push({id: doc.id, ...data})
+                    removeItem(doc.id)
                 }
             })
             
@@ -69,7 +67,9 @@ const Checkout = () => {
                 clear()
                 setOrderId(id)
             }else{
-                toast.error("hay un producto fuera de Stock")
+                outOfStock.forEach(prod =>{
+                    toast.error(`El producto "${prod.name}" esta fuera de Stock`)
+                })
             }
 
         }catch(error){

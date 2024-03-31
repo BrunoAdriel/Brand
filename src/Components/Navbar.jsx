@@ -33,25 +33,11 @@ function Navbar() {
                 <Link to='/'><img src={Logo} alt='Logo de la compañia'/></Link>
             </section>
             <ul className="nav nav-underline justify-content-center">
-
                 {
                     category.map( cat =>{
                         return <Link key={cat.id} to={`/category/${cat.slug}`}><a className="nav-link">{cat.name}</a></Link>
                     })
                 }
-
-                {/* <li className="nav-item">
-                    <Link to='/'><a className="nav-link active" aria-current="page" href="#">Brand</a></Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/category/Celulares'><a className="nav-link" href="#" >Celulares</a></Link>
-                </li>
-                <li className="nav-item">
-                <Link to='/category/iPads'><a className="nav-link" href="#" >Ipads</a></Link>
-                </li>
-                <li className="nav-item">
-                <Link to='/category/Laptops'><a className="nav-link" href="#" >Laptops</a></Link>
-                    </li>    */}
             </ul>
             <section className='SpaceWallet'>
                 <CartWidget/>
