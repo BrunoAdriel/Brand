@@ -1,33 +1,30 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import ItemDetail from '../ItemDeatil/ItemDetail'
 import { useParams } from 'react-router'
-import { getDoc, doc, QueryDocumentSnapshot } from 'firebase/firestore'
-import { db } from '../../services/firebaseConfig'
 import { toast } from 'react-toastify';
 import BackButton from '../BackButton/BackButton';
+import { getProductsById } from '../../services/firestore/products'
+import { useAsync } from '../../hooks/useAsync'
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState(null)
-
     const { itemId } = useParams()
 
-    useEffect(() => {
-        const productDoc = doc(db, 'products', itemId)
+    const asyncFunction = () => getProductsById(itemId)
+    const {data: product, loading, error} = useAsync(asyncFunction, [itemId])
 
-        getDoc(productDoc)
-            .then(QueryDocumentSnapshot =>{
-                const data = QueryDocumentSnapshot.data()
-                const prodAdapted = { id: QueryDocumentSnapshot.id, ...data }
+    if(loading){
+        return( <section className='paddingCard'>
+                    <h1>Cargando Detalles de Producto...</h1>
+                    <div className="spinner-border text-secondary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                    </div>
+                </section>
+        )
+    }
 
-                setProduct(prodAdapted)
-            })
-            .catch(error=>{
-                toast.error(`Error al cargar los datos del productos`,error)
-            })
-    },[itemId])
-
-
+    if(error){
+        toast.error(`Error al cargar el detalle del producto`,error)
+    }
 
     return (
     <>
