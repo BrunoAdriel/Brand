@@ -1,16 +1,18 @@
 import React from 'react'
 import Item from '../Item/Item '
 
-const ItemList = ({products}) => {
+const ItemList = ({ products }) => {
     return (
-
-    <section className='paddingCard'>
-        {products.map(products =>{
-            return <Item key={products.id} {...products}/>
-        })}
-    </section>
-
-)
+        <section className='paddingCard'>
+            {products ? (
+                products.map(product => (
+                    <Item key={product.id} {...product} />
+                ))
+            ) : (
+                <p>No hay productos disponibles</p>
+            )}
+        </section>
+    )
 }
 
 export default ItemList

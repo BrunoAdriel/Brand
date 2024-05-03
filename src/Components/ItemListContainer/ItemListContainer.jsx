@@ -26,7 +26,7 @@ function ItemListContainer() {
                 </section>
     )
 }
-
+console.log(products)
     return (
     <>
         <div className='container' id='container'>
